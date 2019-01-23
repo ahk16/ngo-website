@@ -1,0 +1,21 @@
+{
+  "name": "ngo-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "express": "^4.16.4",
+    "jsonwebtoken": "^8.4.0",
+    "mongodb": "^3.1.11",
+    "mongoose": "^5.4.4",
+    "node-datetime": "^2.1.2",
+    "validator": "^10.11.0"
+  }
+}
