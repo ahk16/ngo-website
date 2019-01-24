@@ -12,7 +12,7 @@ class EventIndex extends Component {
     }
 
     componentDidMount() {
-        axios.get('http://localhost:3001/createEvent').then( response => this.setState( {events: response.data}))
+        axios.get('http://localhost:3001/event').then( response => this.setState( {events: response.data}))
     }
 
     render() {

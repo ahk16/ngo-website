@@ -17,7 +17,7 @@ app.get('/', function(req, res) {
     res.redirect('localhost:3000/');
 })
 
-app.use('/createEvent', eventsController);
+app.use('/event', eventsController);
 
 app.use('/bloodIntimation', bloodInfoController);
 

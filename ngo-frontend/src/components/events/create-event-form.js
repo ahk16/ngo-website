@@ -68,7 +68,7 @@ class Events extends Component {
         }
         
 
-        axios.post('http://localhost:3001/createEvent', formData).then(response => {
+        axios.post('http://localhost:3001/event', formData).then(response => {
             console.log(response.data);
         })
 
@@ -87,7 +87,7 @@ class Events extends Component {
     render() {
         return(
             <div>
-                <h2> Register for the event </h2>
+                <h2> Upload Event </h2>
                 <form onSubmit={this.handleSubmit} ref='form'>
                 <br/>
                 <br/>

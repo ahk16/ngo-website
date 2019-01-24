@@ -17,7 +17,7 @@ class App extends Component {
       <BrowserRouter>
         <div>
           <Route path="/" component={HomePage} exact/>
-          <Route path="/eventsform" component={Events} />
+          <Route path="/event/new" component={Events} />
           <Route path="/events" component={EventIndex} exact/>
           <Route path="/events/:id" component={EventShow} />
           <Route path="/blood/intimationform" component={BloodInfoForm} />

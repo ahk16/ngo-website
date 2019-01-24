@@ -25,6 +25,10 @@ const userSchema = new Schema( {
             }
         }
     },
+    bloodGroup: {
+        type: String,
+        enum: ["A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-"]
+    },
     email: {
         type: String,
         unique: true,
@@ -41,7 +45,7 @@ const userSchema = new Schema( {
     },
     role: {
         type: String,
-        enum: ['admin', 'user'],
+        enum: ['admin', 'guest', 'volunteer', 'donor','scribe'],
         default: 'user'
     },
     password: {

@@ -1,0 +1,88 @@
+import React, {Component} from 'react'
+import axios from 'axios'
+
+import EventShow from './show';
+
+
+class EditForm extends Component {
+    constructor(props) {
+        super(props) 
+        this.state = {
+            eventName: this.props.location.eventName,
+            location: this.props.location.location,
+            date: this.props.location.date,
+            organizerName: this.props.location.organizerName,
+            mobile: this.props.location.mobile,
+            startTime: this.props.location.startTime,
+            endTime: this.props.location.endTime,
+            description: this.props.location.description
+        }
+    }
+    handleInputChange = (event) => {
+        this.setState({
+            [event.target.name] : event.target.value
+        })
+    }
+
+    handleSubmit = (event) => {
+        event.preventDefault();
+        let id = this.props.location.state.id
+        const editedData = {
+            name: this.state.eventName,
+            destinatiom: this.state.location,
+            day: this.state.date,
+            organizer: this.state.organizerName,
+            phone: this.state.mobile,
+            initialTime: this.state.startTime,
+            finalTime: this.state.endTime,
+            info: this.state.description
+        }
+
+        axios.put( `http://localhost:3001/createEvent/${id}`, editedData).then( response => {
+            console.log(response.data);
+        })
+    }
+
+    render() {
+        return(
+            <form onSubmit={this.handleSubmit}>
+                <label>Event Title :
+                    <input type='text' name='eventName' value={this.state.eventName} onChange={this.handleInputChange} />
+                </label> <br /> <br />
+
+                <label> Location :
+                    <input type='text' name='location' value={this.state.location} onChange={this.handleInputChange} />
+                </label> <br /> <br />
+
+                <label> Date :
+                    <DatePicker onChange={this.handleDateChange} selected={this.state.date} value={this.state.date}/>
+                </label> <br /> <br />
+
+                <label> Organizer Name :
+                    <input type='text' name='organizerName' value={this.state.organizerName} onChange={this.handleInputChange} />
+                </label> <br />
+
+                <label> Organizer Phone Number :
+                    <input type='text' name='mobile' value={this.state.mobile} onChange={this.handleInputChange} />
+                </label> <br />
+
+                <label> Start Time :
+                    <TimePicker onChange={this.handleStartTime} selected={this.state.startTime} value={this.state.startTime} />
+                </label> <br />
+
+                <label> End Time :
+                    <TimePicker onChange={this.handleEndTime} selected={this.state.endTime} value={this.state.endTime} />
+                </label> <br />
+
+                <label> Description :
+                    <textarea rows='10' cols='35' value={this.state.description} onChange={this.handleInputChange} name='description' placeholder='type here'></textarea>
+                </label> <br />
+
+                <input type='submit' value='submit'/>
+                <input type='reset' value='reset' onClick={this.handleReset} />
+            
+            
+            </form>
+        )
+    }
+}
