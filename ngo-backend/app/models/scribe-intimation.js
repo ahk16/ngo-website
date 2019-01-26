@@ -30,6 +30,9 @@ const scribeInfoSchema = new Schema({
     time: {
         type: datetime,
         required: true
+    },
+    description: {
+        type: String
     }
 })
 

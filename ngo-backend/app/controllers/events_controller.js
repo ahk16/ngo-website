@@ -39,7 +39,10 @@ router.put('/:id', function(req, res) {
     let id = req.params.id;
     let body = req.body;
     Events.findByIdAndUpdate(id, { $set: body}, {new: true}).then(function(event) {
-        res.send(event);
+        res.send({
+            event,
+            notice: "Successfully edited"
+        });
     }).catch(function(err) {
         res.send(err);
     })

@@ -9,6 +9,7 @@ import EventShow from './components/events/show';
 import BloodInfoForm from './components/bloodintimation/intimation-form';
 import HomePage from './components/home/index';
 import ScribeInoForm from './components/scribeIntimation/intimation-form';
+import EditForm from './components/events/form-edit';
 
 
 class App extends Component {
@@ -20,6 +21,7 @@ class App extends Component {
           <Route path="/event/new" component={Events} />
           <Route path="/events" component={EventIndex} exact/>
           <Route path="/events/:id" component={EventShow} />
+          <Route path="/event/edit/:id" component={EditForm} />
           <Route path="/blood/intimationform" component={BloodInfoForm} />
           <Route path="/scribe/intimationform" component={ScribeInoForm} />
         </div>

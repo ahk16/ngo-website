@@ -3,6 +3,9 @@ import axios from 'axios';
 import {Link} from 'react-router-dom';
 import {Redirect} from 'react-router'
 
+import {Events} from './create-event-form';
+
+
 class EventShow extends Component{
     constructor(props) {
         super(props) 
@@ -10,7 +13,6 @@ class EventShow extends Component{
             event: [],
             redirect: false
         } 
-        
     }
 
     componentDidMount() {
@@ -28,9 +30,6 @@ class EventShow extends Component{
          })
     } 
 
-    // handleEdit = (event) => {
-    //     <Redirect to="/eventsform" />
-    // }
 
     render() {
         if(this.state.redirect) {
@@ -38,13 +37,28 @@ class EventShow extends Component{
         }
         return(
             <div>
-                <p> <b>Event Name:</b> {this.state.event.eventName} <br /> <b>Location:</b> {this.state.event.location} <br /> <b>Date: </b> {this.state.event.date} <br/> <b>Organizer: </b> {this.state.event.organizerName} <br /> <b> Organizer Phone Number: </b> {this.state.event.mobile} <br />  <b>Start Time:</b> {this.state.event.startTime} <br />
+                <p> <b> Event ID: </b> {this.state.event._id} <br /> <b>Event Name:</b> {this.state.event.eventName} <br /> <b>Location:</b> {this.state.event.location} <br /> <b>Date: </b> {this.state.event.date} <br/> <b>Organizer: </b> {this.state.event.organizerName} <br /> <b> Organizer Phone Number: </b> {this.state.event.mobile} <br />  <b>Start Time:</b> {this.state.event.startTime} <br />
                 <b>End Time:</b> {this.state.event.endTime} <br /> <b>Description:</b> {this.state.event.description} </p>
                 <Link to="/events">Back</Link> <br />
                 <button onClick={this.handleDelete} > DELETE </button>
-                <button onClick={this.handleEdit} > EDIT </button>
+                <button> <Link to={{
+                    pathname:`/event/edit/${this.state.event._id}`,
+                    state: {
+                        id: this.state.event._id,
+                        eventName: this.state.event.eventName,
+                        location: this.state.event.location,
+                        date: this.state.event.date,
+                        startTime: this.state.event.startTime,
+                        endTime: this.state.event.endTime,
+                        mobile: this.state.event.mobile,
+                        organizerName: this.state.event.organizerName,
+                        description: this.state.event.description
+                    }
+                }}>EDIT </Link>  </button>
             </div>
-        )
+        );
+
+        
     }
 }
 
