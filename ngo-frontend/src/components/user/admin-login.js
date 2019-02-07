@@ -49,6 +49,7 @@ class AdminLogin extends Component {
                     </label><br />
 
                     <input type='submit' value='login' />
+                    <button />
                 </form>
                 
 

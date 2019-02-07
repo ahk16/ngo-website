@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const { User } = require('../models/user');
+const {authenticateUser} = require('../middlewares/authentication');
 
 router.post('/register', function(req, res) {
     let body = req.body;
@@ -26,6 +27,21 @@ router.post('/login', function(req, res) {
         res.status(401).send(err);
     }) 
 });
+
+router.delete('/logout', authenticateUser, function(req, res) {
+    const { user, token } = req;
+    const tokenInfo = user.tokens.find(function(tokenItem) {
+        return tokenItem.token == token;
+    })
+
+    //users.tokens.remove(tokenInfo._id);
+   user.tokens.id(tokenInfo._id).remove()
+    user.save().then((user) => {
+        res.send({
+            notice: 'Successfully logged out'
+        })
+    })
+})
 
 
 module.exports = {

@@ -7,7 +7,7 @@ const { BloodInfo } = require('../models/blood-intimation');
 const { authenticateUser, authorizeUser} = require('../middlewares/authentication');
 
 
-router.get('/', authenticateUser, authorizeUser, function(req, res) {
+router.get('/', function(req, res) {
     BloodInfo.find().then(function(info) {
         res.send(info);
     }).catch(function(err) {
@@ -15,7 +15,7 @@ router.get('/', authenticateUser, authorizeUser, function(req, res) {
     })
 });
 
-router.post('/', authenticateUser, authorizeUser, function(req, res) {
+router.post('/', function(req, res) {
     let body = req.body;
     let b = new BloodInfo(body);
     b.save().then(function(bloodinfo) {
@@ -29,7 +29,7 @@ router.post('/', authenticateUser, authorizeUser, function(req, res) {
 
 })
 
-router.put('/:id', authenticateUser, authorizeUser, function(req, res) {
+router.put('/:id', function(req, res) {
     let id = req.params.id;
     let body = req.body;
     BloodInfo.findByIdAndUpdate(id, { $set: body}, {new: true}).then(function(info) {
@@ -39,7 +39,7 @@ router.put('/:id', authenticateUser, authorizeUser, function(req, res) {
     })
 })
 
-router.delete('/:id', authenticateUser,  authorizeUser, function(req, res) {
+router.delete('/:id', function(req, res) {
     let id = req.params.id;
     BloodInfo.findByIdAndDelete(id).then(function(info) {
         res.send({
