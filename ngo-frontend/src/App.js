@@ -10,6 +10,8 @@ import BloodInfoForm from './components/bloodintimation/intimation-form';
 import HomePage from './components/home/index';
 import ScribeInoForm from './components/scribeIntimation/intimation-form';
 import EditForm from './components/events/form-edit';
+import AdminRegister from './components/user/admin-register';
+import AdminLogin from './components/user/admin-login';
 
 
 class App extends Component {
@@ -24,6 +26,8 @@ class App extends Component {
           <Route path="/event/edit/:id" component={EditForm} />
           <Route path="/blood/intimationform" component={BloodInfoForm} />
           <Route path="/scribe/intimationform" component={ScribeInoForm} />
+          <Route path="/admin/register" component={AdminRegister} />
+          <Route path="/admin/login" component={AdminLogin} />
         </div>
       
       

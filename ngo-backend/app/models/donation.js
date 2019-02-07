@@ -17,7 +17,7 @@ const donorsSchema = new Schema ({
     },
     languages: {
         type: String,
-        enum: ["Kannada", "English", "Hindi", "Sanskrit"];
+        enum: ["Kannada", "English", "Hindi", "Sanskrit"]
     },
     availability: {
         type: String,

@@ -3,7 +3,7 @@ const router = express.Router();
 
 const { ObjectID } = require('mongodb');
 const { Events } = require('../models/create-event');
-
+const {authenticateUser, authorizeUser} = require('../middlewares/authentication');
 
 router.get('/', function(req, res) {
     Events.find().then(function(events) {
@@ -22,7 +22,7 @@ router.get('/:id', function(req, res) {
     })
 })
 
-router.post('/', function(req, res) {
+router.post('/', authenticateUser, authorizeUser, function(req, res) {
     let body = req.body;
     let e = new Events(body);
     e.save().then(function(event) {
@@ -35,7 +35,7 @@ router.post('/', function(req, res) {
     })
 })
 
-router.put('/:id', function(req, res) {
+router.put('/:id', authenticateUser, authorizeUser, function(req, res) {
     let id = req.params.id;
     let body = req.body;
     Events.findByIdAndUpdate(id, { $set: body}, {new: true}).then(function(event) {
@@ -48,7 +48,7 @@ router.put('/:id', function(req, res) {
     })
 })
 
-router.delete('/:id', function(req, res) {
+router.delete('/:id', authenticateUser, authorizeUser, function(req, res) {
     let id = req.params.id;
     Events.findByIdAndDelete(id).then(function(event) {
         res.send({

@@ -9,7 +9,7 @@ router.post('/register', function(req, res) {
     u.save().then((function(user){
        return user.generateToken()
     })).then(function(token) {
-        res.header('x-auth', token).send(); //x- for custom header //sending it back to the client,storing in local storage.
+        res.json({'x-auth': token}).send(); //x- for custom header //sending it back to the client,storing in local storage.
     }).catch(function(err) {
         res.send(err);
     })
@@ -21,7 +21,7 @@ router.post('/login', function(req, res) {
     User.findByCredentials(body.email, body.password).then(function(user) {
         return user.generateToken();
     }).then(function(token) {
-        res.header('x-auth', token).send();
+        res.json({'x-auth': token}).send();
     }).catch(function(err) {
         res.status(401).send(err);
     }) 

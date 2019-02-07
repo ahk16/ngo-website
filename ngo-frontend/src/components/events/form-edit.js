@@ -35,9 +35,7 @@ class EditForm extends Component {
     handleDateChange = (date) => {
         this.setState( {
             date: date
-        }, () => console.log(this.state.date));
-
-        
+        }, () => console.log(this.state.date));   
     }   
 
     handleStartTime = (time) => {
@@ -69,8 +67,7 @@ class EditForm extends Component {
 
         axios.put( `http://localhost:3001/event/${id}`, editedData).then( response => { 
             this.setState({
-                redirect: true,
-                date: response.data
+                redirect: true
             })
            console.log(response.data);
         })

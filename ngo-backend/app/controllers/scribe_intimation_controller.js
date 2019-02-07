@@ -2,8 +2,9 @@ const express = require('express');
 const router = express.Router();
 
 const { ScribeInfo } = require('../models/scribe-intimation');
+const {authenticateUser, authorizeUser} = require('../middlewares/authentication');
 
-router.get('/', (req, res) => {
+router.get('/', authenticateUser, authorizeUser, (req, res) => {
     ScribeInfo.find().then( info => {
         res.send(info);
     }).catch( err => {
@@ -11,7 +12,7 @@ router.get('/', (req, res) => {
     })
 })
 
-router.post('/', (req, res) => {
+router.post('/', authenticateUser, authorizeUser, (req, res) => {
     let body = req.body;
     let s = new ScribeInfo(body);
     s.save().then( info => {
@@ -24,7 +25,7 @@ router.post('/', (req, res) => {
     })
 })
 
-router.put('/:id', (req, res) => {
+router.put('/:id', authenticateUser, authorizeUser, (req, res) => {
     let id = req.params.id;
     let body = req.body;
     ScribeInfo.findByIdAndUpdate(id, { $set: body}, {new: true}).then( info => {
@@ -34,7 +35,7 @@ router.put('/:id', (req, res) => {
     })
 })
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', authenticateUser, authorizeUser, (req, res) => {
     let id =  req.params.id;
     ScribeInfo.findByIdAndDelete(id).then( info => {
         res.send({
