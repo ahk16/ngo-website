@@ -6,11 +6,12 @@ const {authenticateUser} = require('../middlewares/authentication');
 
 router.post('/register', function(req, res) {
     let body = req.body;
+    //console.log(body);
     let u = new User(body);
     u.save().then((function(user){
        return user.generateToken()
     })).then(function(token) {
-        res.json({'x-auth': token}).send(); //x- for custom header //sending it back to the client,storing in local storage.
+        res.send({'x-auth': token}); //x- for custom header //sending it back to the client,storing in local storage.
     }).catch(function(err) {
         res.send(err);
     })
@@ -22,7 +23,7 @@ router.post('/login', function(req, res) {
     User.findByCredentials(body.email, body.password).then(function(user) {
         return user.generateToken();
     }).then(function(token) {
-        res.json({'x-auth': token}).send();
+        res.send(token);
     }).catch(function(err) {
         res.status(401).send(err);
     }) 

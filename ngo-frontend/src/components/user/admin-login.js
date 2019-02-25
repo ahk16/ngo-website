@@ -1,6 +1,9 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import {Redirect} from 'react-router';
+import jwt_decode from 'jwt-decode';
+import {Container, Row, Col} from 'reactstrap';
+import {Form, FormGroup, Label, Input, FormText, Button} from 'reactstrap';
 
 class AdminLogin extends Component {
     constructor(props) {
@@ -8,11 +11,14 @@ class AdminLogin extends Component {
         this.state = {
             email: '',
             password: '',
-            redirect: false
+            role: '',
+            isLoggedin: false,
+            redirect: false,
+            user: ''
         }
     }
 
-    handleInputChange = (event) => {
+    handleChange = (event) => {
         this.setState({
             [event.target.name]: event.target.value
         })
@@ -25,35 +31,56 @@ class AdminLogin extends Component {
             password: this.state.password
         }
         axios.post('http://localhost:3001/user/login', formData).then(response => {
-            console.log(response.data);
-        })
-        this.setState( {
-            redirect: true
+            let token =  response.data;
+            console.log(token)
+            let decoded = jwt_decode(token);
+            console.log(decoded);
+            this.setState({
+                isLoggedin: true,
+                redirect: true,
+                user: decoded
+            })
         })
     }
 
     render() {
-        if(this.state.redirect) {
+        if(this.state.redirect && this.state.user.role == "admin" ) {
             return <Redirect to="/" />
         }
+
         return(
             <div>
-                <h2>LOGIN</h2>
-                <form onSubmit={this.handleSubmit} >
-                    <label> Email: 
-                        <input type='text' value={this.state.email} name='email' onChange={this.handleInputChange} />
-                    </label><br />
+                <br/><br/>
+                <Container>
+                    <Form /*action='/user' method='post'*/>
 
-                    <label> Password:   
-                        <input type='text' value={this.state.password} name='password' onChange={this.handleInputChange} />
-                    </label><br />
+                        <FormGroup row>
+                            <h4><u>Login Form:</u> </h4>
+                        </FormGroup>
 
-                    <input type='submit' value='login' />
-                    <button />
-                </form>
+                        <FormGroup row>
+                            <Label for="email" sm={2}>Email</Label>
+                            <Col sm={4}>
+                            <Input type="text" id="email" name="email" value={this.state.email} placeholder="email" onChange={this.handleChange}/>
+                            </Col>
+                        </FormGroup>
+
+                        <FormGroup row>
+                            <Label for="password" sm={2}>Password</Label>
+                            <Col sm={4}>
+                            <Input type="password" id="password" name="password" value={this.state.password} placeholder="min 6 characters" onChange={this.handleChange}/>
+                            </Col>
+                        </FormGroup>
+
+                        <FormGroup row >
+                            <Col sm={1}></Col>
+                            <Col sm={2}><Button onClick={this.handleSubmit} > LOGIN</Button></Col>
+                        </FormGroup>
+
+                    </Form>
+                </Container>
                 
-
-            </div>
+            </div>    
         )
     }
 }

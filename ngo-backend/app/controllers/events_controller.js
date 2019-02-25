@@ -5,7 +5,7 @@ const { ObjectID } = require('mongodb');
 const { Events } = require('../models/create-event');
 const {authenticateUser, authorizeUser} = require('../middlewares/authentication');
 
-router.get('/', function(req, res) {
+router.get('/',  function(req, res) {
     Events.find().then(function(events) {
         res.send(events);
     }).catch(function(err) {

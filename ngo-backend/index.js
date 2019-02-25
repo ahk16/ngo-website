@@ -12,8 +12,10 @@ const { donorsController } = require('./app/controllers/donations_controller');
 
 const port = 3001;
 
-app.use(express.json());
+const cors =  require('cors');
 
+app.use(express.json());
+app.use(cors());
 // app.get('/', function(req, res) {
 //     res.redirect('localhost:3000/');
 // })

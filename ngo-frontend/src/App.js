@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Link, Switch } from 'react-router-dom';
 
 import Events from './components/events/create-event-form';
 import EventIndex from './components/events/index';
@@ -19,15 +19,20 @@ class App extends Component {
     return (
       <BrowserRouter>
         <div>
-          <Route path="/" component={HomePage} exact/>
-          <Route path="/event/new" component={Events} />
-          <Route path="/events" component={EventIndex} exact/>
-          <Route path="/events/:id" component={EventShow} />
-          <Route path="/event/edit/:id" component={EditForm} />
-          <Route path="/blood/intimationform" component={BloodInfoForm} />
-          <Route path="/scribe/intimationform" component={ScribeInoForm} />
-          <Route path="/admin/register" component={AdminRegister} />
-          <Route path="/admin/login" component={AdminLogin} />
+          <Link to="/"> Home </Link>
+          <Link to="/events"> Events </Link>
+          
+          <Switch>
+            <Route path="/" component={HomePage} exact/>
+            <Route path="/event/new" component={Events} />
+            <Route path="/events" component={EventIndex} exact/>
+            <Route path="/events/:id" component={EventShow} />
+            <Route path="/event/edit/:id" component={EditForm} />
+            <Route path="/blood/intimationform" component={BloodInfoForm} />
+            <Route path="/scribe/intimationform" component={ScribeInoForm} />
+            <Route path="/admin/register" component={AdminRegister} />
+            <Route path="/admin/login" component={AdminLogin} />
+          </Switch>
         </div>
       
       

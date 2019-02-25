@@ -44,9 +44,9 @@ const userSchema = new Schema( {
         trim: true
     },
     role: {
-        type: String,
+        type: [String],
         enum: ['admin', 'guest', 'volunteer', 'donor','scribe'],
-        default: 'user'
+        default: 'guest'
     },
     password: {
         type: String,
@@ -64,7 +64,8 @@ const userSchema = new Schema( {
 userSchema.methods.generateToken = function () {
     let user = this;
     let tokenData = {
-        userId: this._id
+        userId: this._id,
+        role: this.role
     }
     let jwtToken = jwt.sign(tokenData, 'supersecret')
     user.tokens.push( {token: jwtToken} );
