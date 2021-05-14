@@ -16,7 +16,7 @@
     "jsonwebtoken": "^8.4.0",
     "jwt-decode": "^2.2.0",
     "mongodb": "^3.1.13",
-    "mongoose": "^5.4.4",
+    "mongoose": "^5.7.5",
     "node-datetime": "^2.1.2",
     "validator": "^10.11.0"
   }
