@@ -4,13 +4,11 @@ import DatePicker from 'react-date-picker';
 import TimePicker from 'react-time-picker';
 import {Redirect} from 'react-router';
 
-
 import EventShow from './show';
-
 
 class EditForm extends Component {
     constructor(props) {
-        super(props) 
+        super(props)
         this.state = {
             id: this.props.location.state._id,
             eventName: this.props.location.state.eventName,
@@ -23,7 +21,7 @@ class EditForm extends Component {
             description: this.props.location.state.description,
             redirect: false
         }
-        
+
     }
     handleInputChange = (event) => {
         this.setState({
@@ -31,17 +29,17 @@ class EditForm extends Component {
         })
         console.log(event.target.value)
     }
-    
+
     handleDateChange = (date) => {
         this.setState( {
             date: date
-        }, () => console.log(this.state.date));   
-    }   
+        }, () => console.log(this.state.date));
+    }
 
     handleStartTime = (time) => {
         this.setState({
             startTime: time
-        }, () => console.log(this.state.startTime)); 
+        }, () => console.log(this.state.startTime));
     }
 
     handleEndTime = (time) => {
@@ -65,7 +63,7 @@ class EditForm extends Component {
             description: this.state.description
         }
 
-        axios.put( `http://localhost:3001/event/${id}`, editedData).then( response => { 
+        axios.put( `http://localhost:3001/event/${id}`, editedData).then( response => {
             this.setState({
                 redirect: true
             })
@@ -115,7 +113,7 @@ class EditForm extends Component {
                 </label> <br />
 
                 <input type='submit' value='update'/>
-                
+
             </form>
         </div>
         )
